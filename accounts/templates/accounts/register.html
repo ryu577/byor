@@ -1,13 +1,21 @@
-{% load bootstrap3 %}
+{% extends "byor/base.html" %}
 {% load staticfiles %}
-
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.js' %}"></script>
+{% block content %}
 
 <form method="POST" action="" enctype="multipart/form-data" class="form">
     {% csrf_token %}
-    {% bootstrap_form userform %}
-    {% bootstrap_form profileform %}
+    {{ userform }}
+    {{ profileform }}
     <input type="submit">
 </form>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+        $(function(){
+            $('#id_profile-date_of_birth').datepicker();
+        });
+    </script>
+{% endblock %}

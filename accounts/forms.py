@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 from django import forms
-from .models import Profile
+from .models import Profile, Reviewer
 from cuser.models import CUser
-from datetimewidget.widgets import DateWidget
 
 
 class UserForm(forms.ModelForm):
@@ -13,7 +12,7 @@ class UserForm(forms.ModelForm):
 
     def clean(self):
         form_data = self.cleaned_data
-        if form_data['password'] != form_data['password_repeat']:
+        if form_data['password'] != form_data['repeat_password']:
             self._errors['password'] = ['Password do not match']
             del form_data['password']
             del form_data['repeat_password']
@@ -26,7 +25,12 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['phone_number', 'is_male', 'date_of_birth', 'date_of_birth', 'street', 'unit', 'city', 'state', 'zipcode']
-        widgets = {
-            'date_of_birth': DateWidget(attrs={'id': "id-profile-date_of_birth"}, bootstrap_version=3)
-        }
+
     photo = forms.ImageField(required=False)
+
+
+class ReviewerForm(forms.ModelForm):
+    class Meta:
+        model = Reviewer
+        fields = ['position', 'current_job', 'previous_job', 'total_years', 'bs_subject', 'bs_university', 'ms_subject',
+                  'ms_university', 'phd_subject', 'phd_university', 'linkedin', 'summary']

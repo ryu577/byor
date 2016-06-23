@@ -1,0 +1,21 @@
+{% extends "byor/base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<form method="POST" action="" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    {{ userform }}
+    {{ profileform }}
+    {{ reviewerform }}
+    <input type="submit">
+</form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+        $(function(){
+            $('#id_profile-date_of_birth').datepicker();
+        });
+    </script>
+{% endblock %}
