@@ -1,0 +1,13 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.js' %}"></script>
+
+<form method="POST" action="" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    {% bootstrap_form userform %}
+    {% bootstrap_form profileform %}
+    <input type="submit">
+</form>
